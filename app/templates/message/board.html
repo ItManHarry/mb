@@ -1,19 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 {% from 'bootstrap/form.html' import render_form %}
-<head>
+{% block head %}
     <meta charset="UTF-8">
     <title>留言板</title>
     {{ bootstrap.load_css() }}
+    {{static_file('css','css/all.min.css')}}
     {{ bootstrap.load_js()}}
-</head>
-<body>
+    {{static_file('js','js/jquery-confirm.min.js')}}
+{% endblock %}
+{% block main %}
    <div class="container">
        <div class="row">
            <div class="col">
                {{ render_form(form, action=request.full_path,method='post',button_map={'submit':'outline-primary'}) }}
            </div>
        </div>
+       <div class="row">
+            <div class="col-6"><h4>{{ messages|length }}条消息:</h4></div>
+            <div class="col-6 text-right"><a href="#bottom" id = "top"><h4><i class="fas fa-arrow-circle-down"></i></h4></a></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="list-group">
+                    {% for message in messages %}
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h6 class="mb-1">{{ message.title }}</h6>
+                          <small>3 days ago</small>
+                        </div>
+                        <p class="mb-1"><h5>{{ message.body }}</h5></p>
+                        <small>{{ message.timestamp.strftime('%Y/%m/%d %H:%M') }}</small>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col text-center"><a href="#top" id = "bottom"><h4><i class="fas fa-arrow-circle-up"></i></h4></a></div>
+        </div>
    </div>
-</body>
-</html>
+{% endblock %}

@@ -26,6 +26,7 @@ def index():
 #mb:messageboard留言板
 @app.route('/mb',methods=['GET','POST'])
 def mb():
+    messages = TbMessage.query.order_by(TbMessage.timestamp.desc()).all()
     form = MessageForm()
     if form.validate_on_submit():
         message = TbMessage(id=uuid.uuid4().hex, title=form.title.data, body=form.body.data)
@@ -33,4 +34,4 @@ def mb():
         db.session.commit()
         flash('消息已发布!!!')
         return redirect(url_for('mb'))   #重定向board视图,获取最新数据
-    return render_template('message/board.html',form=form)
+    return render_template('message/board.html',form=form, messages=messages)
