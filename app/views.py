@@ -24,7 +24,13 @@ def index():
         return redirect(url_for('index'))   #重定向index视图,获取最新数据
     return render_template('index.html', form=form, messages=messages)
 #mb:messageboard留言板
-@app.route('/mb')
+@app.route('/mb',methods=['GET','POST'])
 def mb():
     form = MessageForm()
+    if form.validate_on_submit():
+        message = TbMessage(id=uuid.uuid4().hex, title=form.title.data, body=form.body.data)
+        db.session.add(message)
+        db.session.commit()
+        flash('消息已发布!!!')
+        return redirect(url_for('mb'))   #重定向board视图,获取最新数据
     return render_template('message/board.html',form=form)
