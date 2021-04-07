@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{% from 'bootstrap/form.html' import render_form %}
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js()}}
+</head>
+<body>
+   <div class="container">
+       <div class="row">
+           <div class="col">
+               {{ render_form(form, action=request.full_path,method='post',button_map={'submit':'outline-primary'}) }}
+           </div>
+       </div>
+   </div>
+</body>
+</html>

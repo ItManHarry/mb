@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found{% endblock %}
+{% block main %}
+<div class = "container-fluid" style="margin-top:200px;">
+    <div class = "row">
+        <div class = "col text-center">
+            <h3><i class="fas fa-road">&nbsp;&nbsp;</i>PAGE NOT FOUND, YOU ARE LOST . <i class="fas fa-road"></i>&nbsp;&nbsp;</h3>
+            <a href = "{{url_for('index')}}"><i class="fas fa-arrow-left"></i>&nbsp;Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

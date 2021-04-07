@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}留言板主页{% endblock %}
+{% block main %}
+<div class="container">
+    {% if get_flashed_messages() %}
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <small>留言已发布!!!</small>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col">
+          <form method="post">
+              <!-- 表单必须填写csrf验证，否则验证会一直无法通过！！！ -->
+              {{ form.csrf_token }}
+              <div class="mb-3">
+                  {{ form.title.label(class='form-label')}}
+                  {{ form.title(class='form-control',placeholder='请输入标题!')}}
+                  {% if form.title.errors %}
+                    {% for error in form.title.errors %}
+                        <small class="text-warning">{{ error }}</small>
+                    {% endfor %}
+                  {% endif %}
+              </div>
+              <div class="mb-3">
+                  {{ form.body.label(class='form-label')}}
+                  {{ form.body(class='form-control',placeholder='请输入消息',row='3')}}
+                  {% if form.body.errors %}
+                    {% for error in form.body.errors %}
+                        <small class="text-warning">{{ error }}</small>
+                    {% endfor %}
+                  {% endif %}
+              </div>
+              <div class="mb-3">
+                  <button class="btn btn-outline-primary" type="submit"><i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;发布</button>
+              </div>
+          </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6"><h4>{{ messages|length }}条消息:</h4></div>
+        <div class="col-6 text-end"><a href="#bottom" id = "top"><h4><i class="fas fa-arrow-circle-down"></i></h4></a></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="list-group">
+                {% for message in messages %}
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h6 class="mb-1">{{ message.title }}</h6>
+                      <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1"><h5>{{ message.body }}</h5></p>
+                    <small>{{ message.timestamp.strftime('%Y/%m/%d %H:%M') }}</small>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col text-center"><a href="#top" id = "bottom"><h4><i class="fas fa-arrow-circle-up"></i></h4></a></div>
+    </div>
+</div>
+{% endblock %}
