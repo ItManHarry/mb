@@ -8,7 +8,7 @@ class TbMessage(db.Model):
     id = db.Column(db.String, primary_key=True)
     title = db.Column(db.String(20))
     body = db.Column(db.Text)
-    timestamp = db.Column(db.DateTime, default=datetime.now,index=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow,index=True)
 
     def __repr__(self):
         return "<Message body %r>" %self.body

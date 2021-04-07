@@ -52,10 +52,12 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                       <h6 class="mb-1">{{ message.title }}</h6>
-                      <small>3 days ago</small>
+                      <small>{{ moment(message.timestamp).fromNow(refresh=True) }}</small>
                     </div>
                     <p class="mb-1"><h5>{{ message.body }}</h5></p>
-                    <small>{{ message.timestamp.strftime('%Y/%m/%d %H:%M') }}</small>
+                    <!--small>{{ message.timestamp.strftime('%Y/%m/%d %H:%M') }}</--small-->
+                    <!-- 使用MomentJS渲染日期 -->
+                    <small>{{ moment(message.timestamp).format('LLL')}}</small>
                 </a>
                 {% endfor %}
             </div>
