@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Inner Error Page{% endblock %}
+{% block main %}
+<div class = "container-fluid" style="margin-top:200px;">
+    <div class = "row">
+        <div class = "col text-center">
+            <h3><i class="fas fa-exclamation-triangle"></i>INNER ERROR OCCURRED, PLEASE CONTACT THE ADMINISTRATOR . <i class="fas fa-exclamation-triangle"></i></h3>
+            <a href = "{{url_for('index')}}"><i class="fas fa-arrow-left"></i>&nbsp;Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

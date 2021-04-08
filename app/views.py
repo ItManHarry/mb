@@ -26,6 +26,7 @@ def index():
 #mb:messageboard留言板
 @app.route('/mb',methods=['GET','POST'])
 def mb():
+    a = 4 / 0
     messages = TbMessage.query.order_by(TbMessage.timestamp.desc()).all()
     form = MessageForm()
     if form.validate_on_submit():

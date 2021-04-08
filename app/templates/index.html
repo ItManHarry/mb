@@ -36,14 +36,17 @@
                   {% endif %}
               </div>
               <div class="mb-3">
-                  <button class="btn btn-outline-primary" type="submit"><i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;发布</button>
+                  <button class="btn btn-outline-primary" type="submit"><i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;发布</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button class="btn btn-outline-success" onclick="checkdate('2021-03-02')">校验日期</button>
               </div>
           </form>
         </div>
     </div>
     <div class="row">
         <div class="col-6"><h4>{{ messages|length }}条消息:</h4></div>
-        <div class="col-6 text-end"><a href="#bottom" id = "top"><h4><i class="fas fa-arrow-circle-down"></i></h4></a></div>
+        <div class="col-6 text-end">
+            <a href="#bottom" id = "top"><h4><i class="fas fa-arrow-circle-down"></i></h4></a>
+        </div>
     </div>
     <div class="row">
         <div class="col">
@@ -68,3 +71,22 @@
     </div>
 </div>
 {% endblock %}
+<script>
+    {% block function%}
+    {{ super() }}
+    function checkdate(value){
+        var myDate = new Date();
+        var now = myDate.valueOf();
+        alert('Now : '+ now)
+        var time = new Date(value).valueOf();
+        alert('Check time : ' + time)
+        if(now>time){
+            alert('日期小于当天，可以使用！')
+          return true;
+        }else{
+            alert('日期大于当天，不可用')
+          return false;
+        }
+    }
+    {% endblock %}
+</script>
